@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Car;
+use App\Models\Driver;
 use Tests\TestCase;
 
 class CarsTest extends TestCase
@@ -38,7 +39,8 @@ class CarsTest extends TestCase
     public function test_store_car_with_driver()
     {
         $car = Car::factory()->create();
-        $response = $this->post('/api/cars', ["name" => $car->name]);
+        $driver = Driver::factory()->create();
+        $response = $this->post('/api/cars/with/driver', ["name" => $car->name, "driver_name" => $driver->name]);
 
         $response->assertStatus(200);
     }
